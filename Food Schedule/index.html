@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Schedule</title>
+    <!-- <script src="https://unpkg.com/ionicons@5.5.1/dist/ionicons.js"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="controller.js"></script>
+</head>
+<body>
+    <nav class="nav">
+            <h1 class="foodlogo">Food Schedule</h1>
+                <div class="buttoni">
+                    <!-- <button type="reset" class="button-refresh">Refresh <i class="fa fa-refresh fa-spin" style="font-size:20px"></i> -->
+                    <!-- </button> -->
+                    <button type="reset" class="button-reset">Reset <i class="fa fa-refresh" style="font-size:20px"></i>
+                    </button>
+                </div>
+        </nav>
+    <div class="container">
+        <div class="box"><h1 class="heading">Sunday</h1>
+            <div id="sunday">
+                <!-- <div class="recipe-item" data-id="${recipe.id}">
+                    <div class="recipe-img">
+                        <img src="${recipe.image}" alt="Recipe Image" class="item-img">
+                    </div>
+                    <div class="recipe-detail">
+                        <h3>${recipe.title}</h3>
+                        <p>${recipe.publisher}</p>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <div class="box"><h1 class="heading">Monday</h1>
+            <div id="monday">
+
+            </div>
+        </div>
+        <div class="box"><h1 class="heading">Tuesday</h1>
+            <div id="tuesday">
+                
+            </div>
+        </div>
+        <div class="box"><h1 class="heading">Wednesday</h1>
+            <div id="wednesday">
+                
+            </div>
+        </div>
+        <div class="box"><h1 class="heading">Thursday</h1>
+            <div id="thursday">
+
+            </div>
+        </div>
+        <div class="box"><h1 class="heading">Friday</h1>
+            <div id="friday">
+                
+            </div>
+        </div>
+        <div class="box"><h1 class="heading">Saturday</h1>
+            <div id="saturday">
+                
+            </div>
+        </div>
+
+    </div>
+<!-- Ingredients -->
+
+        <h1 class="logo">Ingredients</h1>
+        <div class="rowingred">
+            <div id="ingredient">
+                <!-- <div class="recipe__ingredients">
+                    <ul class="recipe-ingredient-list">
+                    <li class="recipe__ingredient">
+                    <div class="recipe__quantity"><input type="checkbox"/> ${quantity ? quantity : ' '} <span class="recipe__unit">${wrk.unit}</span></div>
+                    <div class="recipe__description">
+                        ${wrk.description}
+                    </div>
+                    </li>
+                </div> -->
+            </div>
+        </div>
+<!-- Model -->
+    <div class="model hidden">
+        <!-- <button class="close-modal">&times;</button>
+        <figure class="recipe-fig">
+            <img src="#" alt="Tomato" class="recipe-img" />
+            <h1 class="recipe-title">
+                <span>Title</span>
+            </h1>
+        </figure> -->
+    </div>
+    <div class="overlay hidden"></div>
+</body>
+</html>
