@@ -1,0 +1,71 @@
+* {
+  box-sizing: border-box;
+  /* background-color: rgb(226, 215, 215); */
+}
+.h3 {
+  position: relative;
+  background-color: rgb(124, 248, 211);
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
+}
+
+.App {
+  display: flex;
+  width: 80%;
+  margin: auto;
+  justify-content: space-around;
+}
+
+.App .column {
+  background-color: white;
+  border-radius: 10px;
+  width: 300px;
+  height: 580px;
+  padding: 5px;
+}
+
+.drag {
+  overflow-y: scroll;
+  height: 500px;
+}
+.drag::-webkit-scrollbar {
+  display: none;
+}
+
+.droppablecol {
+  min-height: 40px;
+  width: 100%;
+  background-color: gray;
+  padding: 10px 10px 5px 10px;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* .item {
+    margin-bottom: 10px;
+    background-color: gray;
+    color: white;
+    border: 1px solid white;
+    padding: 1px;
+    border-radius: 7px;
+}  */
+.card {
+  overflow-y: scroll;
+
+  background-color: rgb(56, 55, 55);
+  /* width: 250px; */
+  border-radius: 10px;
+  max-height: 98px;
+  margin-bottom: 5px;
+  padding: 10px;
+  color: rgb(255, 255, 255);
+}
+.card::-webkit-scrollbar {
+  display: none;
+}
+
+.item.dragging {
+  background-color: coral;
+}
