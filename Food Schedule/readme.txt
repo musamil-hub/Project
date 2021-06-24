@@ -25,4 +25,4 @@ npm i parcel@next -D			install parcel for node-module
 
 RUN
 Step-4
-npm run
+npm start
