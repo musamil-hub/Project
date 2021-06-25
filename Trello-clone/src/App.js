@@ -6,6 +6,7 @@ import Header from "./components/Header";
 // import TrelloClone from "./components/TrelloClone";
 import firebase from "./data/Firebase";
 import Dnd from "./DND/Dnd";
+import Loading from "./components/Loading/Loading";
 
 // const itemsFromTodo = [
 //   // { id: v4(), description: "First task", name: "Name 1" },
@@ -91,18 +92,18 @@ function App() {
     const response = await fetch(`${firebase}/${json}`);
     const data = await response.json();
     // firestore.on("value", (response) => {
-      // const data = response.val();
-      for (let i in data) {
-        const datas = {
-          id: i,
-          name: data[i].name,
-          description: data[i].description,
-          color: data[i].color,
-          type: data[i].type,
-          date: data[i].date,
-        }
-        dataarray.push(datas);
-      }
+    // const data = response.val();
+    for (let i in data) {
+      const datas = {
+        id: i,
+        name: data[i].name,
+        description: data[i].description,
+        color: data[i].color,
+        type: data[i].type,
+        date: data[i].date,
+      };
+      dataarray.push(datas);
+    }
     // });
     let todoarr = [];
     let doingarr = [];
@@ -146,7 +147,8 @@ function App() {
   return (
     <div className=".App">
       <Header onfunction={getdata} />
-      {dnd && <Dnd datas={state} />}
+      {!dnd && <Loading />}
+      {dnd && <Dnd datas={state} onfunction={getdata} />}
     </div>
   );
 }

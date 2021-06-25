@@ -1,5 +1,4 @@
 import React from "react";
-import Modal from "../UI/Modal";
 import useInput from "./use-input";
 import classes from "./Modal.module.css";
 import { v4 } from "uuid";

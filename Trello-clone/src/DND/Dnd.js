@@ -2,17 +2,30 @@ import React, { useState } from "react";
 import classes from "./Dnd.module.css";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import _ from "lodash";
-import { v4 } from "uuid";
-const Dnd = (props) => {
-  console.log("dnd");
-  const [text, setText] = useState("");
-  const [state, setState] = useState(props.datas);
-  const handleDragEnd = ({ destination, source }) => {
+import firebase from "../data/Firebase";
+import PopoverPopupState from "../components/UpdateTask/editTask";
 
+// Button
+import EditLocationIcon from "@material-ui/icons/EditLocation";
+import DeleteSharpIcon from "@material-ui/icons/DeleteSharp";
+// Card
+import { useTheme } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+
+const Dnd = (props) => {
+  const [state, setState] = useState(props.datas);
+
+  const [selectedid, setSelectedid] = useState();
+
+  const handleDragEnd = ({ destination, source }) => {
     if (!destination) {
       return;
     }
-    console.log(destination.droppableId);
+    const type = destination.droppableId;
+    // console.log(type);
     if (
       destination.index === source.index &&
       destination.droppableId === source.droppableId
@@ -22,12 +35,22 @@ const Dnd = (props) => {
 
     // Creating a copy of item before removing it from state
     const itemCopy = { ...state[source.droppableId].items[source.index] };
-    
-    // update firbase
+    // var userUid = firebase.auth().currentUser.itemCopy.id;
     console.log(itemCopy.name);
+    setSelectedid(itemCopy.id);
 
+    const objectupdate = {
+      id: itemCopy.id,
+      name: itemCopy.name,
+      description: itemCopy.description,
+      color: itemCopy.color,
+      type: type,
+      date: itemCopy.date,
+    };
 
-
+    if (itemCopy.id) {
+      setupdateHandler(objectupdate, itemCopy.id);
+    }
 
     setState((prev) => {
       prev = { ...prev };
@@ -45,26 +68,27 @@ const Dnd = (props) => {
     });
   };
 
-  const addItem = () => {
-    setState((prev) => {
-      return {
-        ...prev,
-        todo: {
-          title: "Todo",
-          items: [
-            {
-              id: v4(),
-              name: text,
-              description: text,
-            },
-            ...prev.todo.items,
-          ],
-        },
-      };
-    });
+  // update firebase////////////////////////////////////////////////////////////////////////////////////update
+  const setupdateHandler = (data, id) => {
+    const firestore = firebase.database().ref("/treloo").child(id);
+    console.log("update", data, typeof id, firestore);
 
-    setText("");
+    firestore.update(data);
   };
+// Delete firebase
+  const handledate = (id) => {
+    console.log(id);
+    const firestore = firebase.database().ref("/treloo").child(id);
+    firestore.remove();
+    props.onfunction();
+  };
+//////////////////////////////////////////////////////////////////////////////////////
+// const updateHandler=(data) => {
+//   console.log("update click");
+//   console.log(data);
+// }
+
+
 
   return (
     <div className={classes.App}>
@@ -94,7 +118,6 @@ const Dnd = (props) => {
                               draggableId={el.id}
                             >
                               {(provided, snapshot) => {
-                                // console.log(snapshot);
                                 return (
                                   <div
                                     className={`item ${
@@ -104,10 +127,48 @@ const Dnd = (props) => {
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                   >
+                                    <Card className={classes.root}>
+                                      <div className={classes.details}>
+                                        <div className={classes.controls}>
+                                          <IconButton aria-label="Edit">
+                                            <PopoverPopupState id={el} onfunction={props.onfunction} />
+                                          </IconButton>
+                                          <IconButton aria-label="Delete">
+                                            <DeleteSharpIcon
+                                              onClick={() => {
+                                                handledate(el.id);
+                                              }}
+                                            />
+                                          </IconButton>
+                                          <span
+                                            aria-label="date"
+                                            className={classes.date}
+                                          >
+                                            {el.date}
+                                          </span>
+                                        </div>
+                                        <CardContent
+                                          className={classes.content}
+                                        >
+                                          <Typography
+                                            component="h5"
+                                            variant="h5"
+                                            className={classes.title}
+                                          >
+                                            {el.name}
+                                          </Typography>
+                                          <Typography
+                                            variant="subtitle1"
+                                            color="textSecondary"
+                                          >
+                                            {el.description}
+                                          </Typography>
+                                        </CardContent>
+                                      </div>
+                                    </Card>
+
                                     <div className={classes.card}>
-                                      {el.name}
                                       <br />
-                                      {el.description}
                                     </div>
                                   </div>
                                 );

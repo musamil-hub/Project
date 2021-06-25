@@ -2,9 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
-import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import Form from "../AddTask/Form";
-
 function getModalStyle() {
   const top = 50;
   const left = 50;
@@ -50,9 +48,9 @@ export default function SimpleModal(props) {
         onClick={handleOpen}
         variant="contained"
         color="primary"
-        startIcon={<CloudUploadIcon />}
+        startIcon={props.button}
       >
-        Add Events
+        {props.text}
       </Button>
 
       <Modal
@@ -62,7 +60,7 @@ export default function SimpleModal(props) {
         aria-describedby="simple-modal-description"
       >
         <div style={modalStyle} className={classes.paper}>
-          <Form onfunction={props.onfunction} onClose={handleClose}/>
+          <Form onfunction={props.onfunction} onClose={handleClose} />
         </div>
       </Modal>
     </div>

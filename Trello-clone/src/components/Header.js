@@ -1,6 +1,8 @@
 import React from "react";
 import classes from "./Header.module.css";
 import Modal from "../UI/Modal";
+import PostAddIcon from "@material-ui/icons/PostAdd";
+
 const Header = (props) => {
   return (
     <div className={classes.header}>
@@ -12,7 +14,11 @@ const Header = (props) => {
       />
       <span className={classes.title}>Trello</span>
       <span className={classes.button}>
-        <Modal onfunction={props.onfunction} />
+        <Modal
+          onfunction={props.onfunction}
+          button={<PostAddIcon />}
+          text={"Add Task"}
+        />
       </span>
     </div>
   );
